@@ -18,6 +18,7 @@ import java.io.Serializable;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.awt.HeadlessException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     private final AddressService addressServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-    private ArrayList<Client> listClients;
+    private List<Client> listClients;
 
     private int row;
     private int id;
@@ -194,7 +195,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     }
 
     /*Functions to setting data in Form and Table*/
-    private void listClients(ArrayList<Client> listClients) throws Exception {
+    private void listClients(List<Client> listClients) throws Exception {
 
         try {
 
@@ -270,14 +271,14 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         return false;
     }
 
-    private ArrayList<Client> findAllBy(String value) {
+    private List<Client> findAllBy(String value) {
 
         if (!(value.charAt(0) >= 97 && value.charAt(0) <= 122)) {
 
-            return clientServiceImp.findAllBy(Integer.valueOf(value));
+            return clientServiceImp.findAllByAge(Integer.valueOf(value));
         }
         
-        return clientServiceImp.findAllBy(value);
+        return clientServiceImp.findAllByName(value);
     }
 
     /*Functions to manipulate Client*/

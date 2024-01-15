@@ -19,64 +19,39 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    @SneakyThrows
-    public Product save(Product object) {
-
-        if (checkDuplicateRegister(object)) {
-
-            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + object.getProductCode());
-
-        } else {
-
-            return productRepository.save(object).orElseThrow();
-        }
-    }
-
-    @Override
-    @SneakyThrows
-    public Product findById(Integer id) {
-
-        return productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present with that id"));
-    }
-
-    @Override
-    @SneakyThrows
-    public Product update(Integer id, Product object) {
-
-        return productRepository.update(id, object).orElseThrow(() -> new ProductServiceException("No value present with that id"));
-    }
-
-    @Override
-    @SneakyThrows
-    public void delete(Integer id) {
-
-        Product product = productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present with that id"));
-
-        productRepository.delete(product.getId());
-    }
-
-    @Override
-    @SneakyThrows
-    public ArrayList<Product> findAll() {
-        
-        return productRepository.findAll();
-    }
-
-    @Override
-    public boolean checkDuplicateRegister(Product product) {
-
-        return findAll().stream().anyMatch(t -> {
-
-            return (t.getName().equalsIgnoreCase(product.getName())
-                    && t.getBrand().equalsIgnoreCase(product.getBrand())
-                    && t.getProductCode().equalsIgnoreCase(product.getProductCode()));
-        });
-    }
-
-    @Override
-    @SneakyThrows
     public Product findByProductCode(String productCode) {
-        
-        return productRepository.findByProductCode(productCode).orElse(null);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Product save(Product object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Product update(Integer id, Product object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Product> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Product findById(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean checkDuplicateRegister(Product t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
 }

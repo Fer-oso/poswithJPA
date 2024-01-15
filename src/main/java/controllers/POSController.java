@@ -27,7 +27,7 @@ import interfaces.services.ShoppingCartService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import persistence.config.RepositoryImp;
+import persistence.config.DaoImp;
 import persistence.dao.persistence.ProductRepositoryImp;
 import persistence.dao.persistence.ShoppingCartRepositoryImp;
 import services.products.ProductServiceImp;
@@ -40,10 +40,7 @@ public class POSController implements ActionListener {
 
     POS pos;
 
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("posPU");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-    Repository repository = new RepositoryImp(entityManagerFactory, entityManager);
+   Repository repository = new DaoImp();
     
     ClientRepository clientRepository = new ClientRepositoryImp(repository);
     ClientService clientService = new ClientServiceImp(clientRepository);

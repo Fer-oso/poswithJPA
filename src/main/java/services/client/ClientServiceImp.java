@@ -6,6 +6,7 @@ import entitys.models.telephone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.ClientService;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import lombok.SneakyThrows;
 import services.exceptions.ClientServiceException;
@@ -51,15 +52,40 @@ public class ClientServiceImp implements ClientService {
     @Override
     @SneakyThrows
     public Optional<Client> findBySsn(String ssn) {
-        
+
         return clientRepository.findBySsn(ssn);
     }
 
     @Override
     @SneakyThrows
-    public ArrayList<Client> findAll() {
+    public List<Client> findAll() {
 
         return clientRepository.findAll();
+    }
+
+    @Override
+    public List<Client> findAllByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Client> findAllByLastName(String lastName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Client> findAllByAge(Integer age) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Client> findAllByClasification(String clasification) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Client> findAllByAvailability(boolean availability) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -109,12 +135,6 @@ public class ClientServiceImp implements ClientService {
 
             throw new ClientServiceException(e.getMessage());
         }
-    }
-
-    @Override
-    public ArrayList<Client> findAllBy(Object value) {
-
-        return clientRepository.findAllBy(value);
     }
 
 }

@@ -11,7 +11,7 @@ import interfaces.services.ProductService;
 import interfaces.services.TelephoneService;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import persistence.config.RepositoryImp;
+import persistence.config.DaoImp;
 import persistence.dao.persistence.AddressRepositoryImp;
 import persistence.dao.persistence.ClientRepositoryImp;
 import persistence.dao.persistence.ProductRepositoryImp;

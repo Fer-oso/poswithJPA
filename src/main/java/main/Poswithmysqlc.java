@@ -1,5 +1,6 @@
 package main;
 
+import entitys.models.client.Client;
 import interfaces.persistences.repositorys.Repository;
 import persistence.dao.persistence.ClientRepositoryImp;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
@@ -7,7 +8,7 @@ import interfaces.services.ClientService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import persistence.config.RepositoryImp;
+import persistence.config.DaoImp;
 import services.client.ClientServiceImp;
 
 public class Poswithmysqlc {
@@ -17,17 +18,23 @@ public class Poswithmysqlc {
         System.out.println("Hello World!");
 
         // POS.main(args);
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("posPU");
         
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         
-        Repository repository = new RepositoryImp(entityManager);
+    
+        
+        Repository repository = new DaoImp();
 
         ClientRepository clientRepository = new ClientRepositoryImp(repository);
 
         ClientService clientService = new ClientServiceImp(clientRepository);
-
-        System.out.println(clientService.findById(17));
+        
+        Client client = Client.builder().name("persiste").build();
+        
+        
+        
+        System.out.println(clientRepository.findAllByAge(30));
+        
+        
 
         // FunctionalEjemplos functionalEjemplos = new FunctionalEjemplos();
 //         

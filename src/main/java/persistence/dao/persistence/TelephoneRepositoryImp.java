@@ -13,12 +13,12 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     }
 
     @Override
-    public Optional<Telephone> update(Integer id, Telephone object) {
+    public Optional<Telephone> update(Telephone object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Telephone object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -31,4 +31,5 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     public ArrayList<Telephone> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

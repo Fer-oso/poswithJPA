@@ -17,7 +17,6 @@ interfaces\services\ITelephoneService.class
 entitys\models\telephone\Telephone$TelephoneBuilder.class
 services\exceptions\ClientServiceException.class
 entitys\models\employee\Employee.class
-persistence\config\Repository.class
 interfaces\entitys\employee\IEmployee.class
 interfaces\persistences\repositorys\entitys\phones\TelephoneRepository.class
 entitys\models\shop\paymentmethod\CreditCard.class
@@ -103,3 +102,4 @@ persistence\dao\persistence\ClientRepositoryImp.class
 interfaces\persistences\repositorys\entitys\address\IAddressRepository.class
 interfaces\persistences\crud\Save.class
 entitys\models\client\Client_.class
+persistence\config\DaoImp.class

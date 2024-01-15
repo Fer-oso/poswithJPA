@@ -13,12 +13,12 @@ public class ShoppingCartRepositoryImp implements ShoppingCartRepository {
     }
 
     @Override
-    public Optional<ShoppingCart> update(Integer id, ShoppingCart object) {
+    public Optional<ShoppingCart> update(ShoppingCart object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(ShoppingCart object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -31,4 +31,6 @@ public class ShoppingCartRepositoryImp implements ShoppingCartRepository {
     public ArrayList<ShoppingCart> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
 }

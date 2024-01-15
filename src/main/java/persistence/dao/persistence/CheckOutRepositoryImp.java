@@ -13,12 +13,12 @@ public class CheckOutRepositoryImp implements CheckOutRepository{
     }
 
     @Override
-    public Optional<CheckOut> update(Integer id, CheckOut object) {
+    public Optional<CheckOut> update(CheckOut object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(CheckOut object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -31,4 +31,6 @@ public class CheckOutRepositoryImp implements CheckOutRepository{
     public ArrayList<CheckOut> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
 }

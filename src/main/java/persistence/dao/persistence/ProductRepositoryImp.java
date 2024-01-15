@@ -18,12 +18,12 @@ public class ProductRepositoryImp implements ProductRepository {
     }
 
     @Override
-    public Optional<Product> update(Integer id, Product object) {
+    public Optional<Product> update(Product object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Product object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -36,4 +36,6 @@ public class ProductRepositoryImp implements ProductRepository {
     public ArrayList<Product> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 }

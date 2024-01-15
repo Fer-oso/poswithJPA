@@ -1,8 +1,8 @@
 package interfaces.persistences.repositorys;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FindAll<T> {
     
-    ArrayList<T> findAll();
+    List<T> findAll();
 }

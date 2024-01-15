@@ -21,60 +21,34 @@ public class AddressServiceImp implements AddressService {
     }
 
     @Override
-    @SneakyThrows()
     public Address save(Address object) {
-
-        if (checkDuplicateRegister(object)) {
-
-           return findById(address.getId());
-
-        } else {
-
-            return addressRepository.save(object).orElseThrow(()->new AddresServiceException("Cant duplicate address"));
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    @SneakyThrows
-    public Address findById(Integer id) {
-
-        return addressRepository.findById(id).orElseThrow(() -> new AddresServiceException("No value present with that id"));
-    }
-
-    @Override
-    @SneakyThrows
     public Address update(Integer id, Address object) {
-
-        return addressRepository.update(id, object).orElseThrow(() -> new AddresServiceException("No value present with that id"));
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    @SneakyThrows
     public void delete(Integer id) {
-
-        Address address = addressRepository.findById(id).orElseThrow(() -> new AddresServiceException("No value present with that id"));
-
-        addressRepository.delete(address.getId());
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    @SneakyThrows
     public ArrayList<Address> findAll() {
-
-        return addressRepository.findAll();
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean checkDuplicateRegister(Address address) {
-
-        return findAll().stream().anyMatch(t -> {
-            
-            this.address = t;
-            
-            return (t.getStreetNumber().equals(address.getStreetNumber())
-                    && t.getStreetDirection().equalsIgnoreCase(address.getStreetDirection())
-                    && t.getCity().equalsIgnoreCase(address.getCity())
-                    && t.getState().equalsIgnoreCase(address.getState()));
-        });
+    public Address findById(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public boolean checkDuplicateRegister(Address t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
 }

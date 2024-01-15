@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
@@ -20,6 +22,19 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Tolerate;
 
+@NamedQueries({
+    
+@NamedQuery(name="Client.findBySsn" ,query="SELECT c FROM Client c WHERE c.ssn = :ssn"),
+@NamedQuery(name="Client.findAll" ,query="SELECT c FROM Client c"),
+@NamedQuery(name="Client.findAllByName" ,query="SELECT c FROM Client c WHERE c.name = :name"),
+@NamedQuery(name="Client.findAllByLastName" ,query="SELECT c FROM Client c WHERE c.lastName = :lastName"),
+@NamedQuery(name="Client.findAllByAge" ,query="SELECT c FROM Client c WHERE c.age = :age"),
+@NamedQuery(name="Client.findAllByClasification" ,query="SELECT c FROM Client c WHERE c.clasification = :clasification"),
+@NamedQuery(name="Client.findAllByAvailability" ,query="SELECT c FROM Client c WHERE c.availability = :availability")
+
+})
+
+
 @Entity
 @Builder
 @Getter
@@ -27,7 +42,6 @@ import lombok.experimental.Tolerate;
 @ToString
 @EqualsAndHashCode
 @Table(name = "clients")
-
 public class Client implements IClient {
 
     @Id
@@ -54,5 +68,6 @@ public class Client implements IClient {
     public Client() {
     }
 
+   
     
 }

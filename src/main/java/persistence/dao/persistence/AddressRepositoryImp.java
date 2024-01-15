@@ -13,12 +13,12 @@ public class AddressRepositoryImp implements AddressRepository {
     }
 
     @Override
-    public Optional<Address> update(Integer id, Address object) {
+    public Optional<Address> update(Address object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Address object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -31,4 +31,6 @@ public class AddressRepositoryImp implements AddressRepository {
     public ArrayList<Address> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 }

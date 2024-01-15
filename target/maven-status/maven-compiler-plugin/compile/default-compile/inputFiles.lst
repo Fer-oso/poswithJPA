@@ -32,7 +32,6 @@ C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\services\sho
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\interfaces\entitys\entity\Entity.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\entitys\models\shop\paymentmethod\Cash.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\interfaces\services\Service.java
-C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\persistence\config\Repository.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\interfaces\persistences\crud\CrudRepository.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\persistence\dao\persistence\TelephoneRepositoryImp.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\controllers\shop\shopformcontroller\ShoppingCartFormController.java
@@ -58,6 +57,7 @@ C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\interfaces\e
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\entitys\models\telephone\Telephone.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\persistence\dao\exceptios\DaoExceptions.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\interfaces\entitys\clients\IClient.java
+C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\persistence\config\DaoImp.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\entitys\models\shop\ShoppingCart.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\controllers\shop\shopformcontroller\ShopFormController.java
 C:\Users\XFAO03\Documents\NetBeansProjects\poswithJPA\src\main\java\entitys\models\product\SelectedProduct.java

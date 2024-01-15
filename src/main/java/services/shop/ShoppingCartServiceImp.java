@@ -13,9 +13,7 @@ import java.util.logging.Logger;
 import lombok.SneakyThrows;
 
 public class ShoppingCartServiceImp implements ShoppingCartService {
-
-    private static final long serialVersionUID = 1L;
-
+    
     private final ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCartServiceImp(ShoppingCartRepository shoppingCartRepository) {

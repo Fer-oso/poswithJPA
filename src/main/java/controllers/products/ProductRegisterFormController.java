@@ -9,11 +9,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
 import views.products.ProductRegisterFormView;
 
-public class ProductRegisterFormController extends MouseAdapter implements ActionListener, Serializable {
+public class ProductRegisterFormController extends MouseAdapter implements ActionListener{
 
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +23,7 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
     private final ProductService productServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-    private ArrayList<Product> listProducts;
+    private List<Product> listProducts;
     private Product product;
 
     /*Constructors*/

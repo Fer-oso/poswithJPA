@@ -8,24 +8,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
 import views.products.ProductFindByPcFormView;
 
-public class ProductFindByPcController extends MouseAdapter implements ActionListener,Serializable {
+public class ProductFindByPcController extends MouseAdapter implements ActionListener {
 
-    private static final long serialVersionUID = 1L;
-
+  
     private final ProductFindByPcFormView productFindByPcFormView;
 
     private final ProductService productServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
 
-    private ArrayList<Product> listProducts;
+    private List<Product> listProducts;
     private int row;
     private int id;
     private Product product;
