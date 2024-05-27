@@ -140,7 +140,7 @@ public class CheckOutFormController implements ActionListener {
 
     private void listProductsCarshop() {
 
-        List<SelectedProduct> listProductsShoppingCart = shoppingCart.getProducts();
+        List<SelectedProduct> listProductsShoppingCart = (List<SelectedProduct>) shoppingCart.getProducts();
 
         model = (DefaultTableModel) checkOutFormView.getjTableCheckOut().getModel();
 

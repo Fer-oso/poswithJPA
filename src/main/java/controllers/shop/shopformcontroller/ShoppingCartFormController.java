@@ -7,7 +7,7 @@ import interfaces.services.ShoppingCartService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import views.shop.CheckOutFormView;
 import views.shop.ShoppingCartFormView;
@@ -26,7 +26,7 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     CheckOutService checkOutService;
 
     /*Global variables*/
-    private final ArrayList<SelectedProduct> listShoppingCartProducts;
+    private final Map<String,SelectedProduct> listShoppingCartProducts;
 
     /*Constructors*/
     public ShoppingCartFormController(ShoppingCartFormView shoppingCartFormView, ShoppingCart shoppingCart, ShoppingCartService shoppingCartService) {
@@ -81,7 +81,7 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
 
         DefaultTableModel model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
 
-        for (SelectedProduct sp : listShoppingCartProducts) {
+        for (SelectedProduct sp : listShoppingCartProducts.values()) {
 
             Object[] objectProduct = {sp.getProductCode(), sp.getProductName(), sp.getProductBrand(),
                 sp.getProductQuantity(), sp.getProductPrice(), sp.getFinalPrice()};

@@ -13,7 +13,7 @@ public class RefreshTable {
 
             table.removeRow(i);
 
-            i = i - 1;
+            i -= 1;
         }
     }
 }

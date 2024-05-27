@@ -1,5 +1,6 @@
 package controllers.Shop.shopformcontroller;
 
+import controllers.utils.FormatNumber;
 import controllers.utils.RefreshTable;
 import entitys.models.client.Client;
 import entitys.models.product.Product;
@@ -13,7 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,7 +39,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
     /*Global variables*/
     private DefaultTableModel model = new DefaultTableModel();
 
-    private final ArrayList<SelectedProduct> listSelectedProducts = new ArrayList<>();
+    private final Map<String, SelectedProduct> productMap = new HashMap<>();
 
     private Product product;
 
@@ -45,8 +48,6 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
     private SelectedProduct selectedProduct;
 
     private int productQuantityToSell;
-
-    private int row;
 
     private Double total;
 
@@ -130,10 +131,10 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         }
     }
 
-    /*Function o business logic*/
+    /*Functions*/
     private void findProduct() {
 
-        if (!"".equals(shopFormView.getTxtProductCode().getText())) {
+        if (checkProductCode()) {
 
             product = productServiceImp.findByProductCode(shopFormView.getTxtProductCode().getText());
 
@@ -152,19 +153,17 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
             } else {
 
                 JOptionPane.showMessageDialog(null, "Cant find with that product code, try again");
-
-                shopFormView.getTxtProductCode().requestFocus();
-
-                shopFormView.getTxtProductName().setText("");
-
-                shopFormView.getTxtProductBrand().setText("");
-
-                shopFormView.getTxtProductStock().setText("");
-
-                shopFormView.getTxtProductPrice().setText("");
-
-                shopFormView.getTxtProductQuantityToSell().setText("");
             }
+        }
+    }
+
+    private boolean checkProductCode() {
+
+      String productCode = shopFormView.getTxtProductCode().getText();
+
+        if (!"".equals(productCode)) {
+
+            return true;
 
         } else {
 
@@ -173,6 +172,8 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
             shopFormView.getTxtProductCode().requestFocus();
 
             shopFormView.getTxtProductQuantityToSell().setText("");
+
+            return false;
         }
     }
 
@@ -230,7 +231,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         model = (DefaultTableModel) shopFormView.getjTableProducts().getModel();
 
-        for (SelectedProduct sp : listSelectedProducts) {
+        for (SelectedProduct sp : productMap.values()) {
 
             Object[] objectProduct = {sp.getProductCode(), sp.getProductName(), sp.getProductBrand(),
                 sp.getProductQuantity(), sp.getProductPrice(), sp.getFinalPrice()};
@@ -249,71 +250,64 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         double finalPrice;
 
-        for (var sp : listSelectedProducts) {
+        for (var sp : productMap.values()) {
 
             finalPrice = sp.getFinalPrice() * 1.21;
 
             total += finalPrice;
-
-            shopFormView.getLblTotal().setText(String.valueOf(total));
         }
+        shopFormView.getLblTotal().setText(String.valueOf(FormatNumber.formatNumber(total)));
     }
 
     private void getProductSelectedOfTable() {
-
-        row = shopFormView.getjTableProducts().getSelectedRow();
-
-        selectedProduct = listSelectedProducts.get(row);
+        
+        var productList = productMap.values().toArray();
+        
+        int row = shopFormView.getjTableProducts().getSelectedRow();
+     
+        selectedProduct = (SelectedProduct) productList[row];
+      
     }
 
     private void addProductToList() {
 
-        boolean existDuplicate = false; //Flag to check duplicate existence
+        String productCode = selectedProduct.getProductCode();
 
-        if (listSelectedProducts.isEmpty()) { // if the list is empty 
+        if (productMap.containsKey(productCode)) {
 
-            listSelectedProducts.add(selectedProduct); //add directly the product
+            SelectedProduct product = productMap.get(productCode);
+
+            JOptionPane.showMessageDialog(null, "Producto ya está en la lista, se añadió a la cantidad anterior.");
+
+            product.setProductQuantity(product.getProductQuantity() + productQuantityToSell);
+
+            product.setFinalPrice(product.getProductQuantity() * selectedProduct.getProductPrice());
 
         } else {
 
-            for (SelectedProduct p : listSelectedProducts) {
-
-                if (p.getProductCode().equals(selectedProduct.getProductCode())) {
-
-                    JOptionPane.showMessageDialog(null, "producto ya esta en la lista");
-
-                    p.setProductQuantity(p.getProductQuantity() + productQuantityToSell);
-
-                    p.setFinalPrice(p.getProductQuantity() * selectedProduct.getProductPrice());
-
-                    existDuplicate = true; // change the value to true  if the product exist
-
-                    break;
-                }
-            }
-
-            if (!existDuplicate) {
-
-                listSelectedProducts.add(selectedProduct);
-            }
+            productMap.put(productCode, selectedProduct);
         }
     }
 
     private void removeProductToList() {
 
-        Iterator<SelectedProduct> iteratorList = listSelectedProducts.iterator();
+        Iterator<SelectedProduct> iteratorList = productMap.values().iterator();
+      
+        SelectedProduct productToRemove = null;
 
-        while (iteratorList.hasNext()) {
+        while (iteratorList.hasNext() && productToRemove == null) {
 
-            if (iteratorList.next().getProductCode().equals(selectedProduct.getProductCode())) {
+            SelectedProduct productIt = iteratorList.next();
+
+            if (productIt.getProductCode().equals(selectedProduct.getProductCode())) {
+
+                productToRemove = productIt;
 
                 shopFormView.getTxtProductStock().setText(String.valueOf(product.getStock()));
 
                 iteratorList.remove();
 
                 shopFormView.getLblTotal().setText("" + (total - selectedProduct.getFinalPrice() * 1.21));
-
-                break;
             }
         }
     }
@@ -357,10 +351,11 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
             JOptionPane.showMessageDialog(null, "Need add products");
         }
 
-        ShoppingCart shoppingCart = ShoppingCart.builder().id(new Random().nextInt(1000)).client(client).products(listSelectedProducts).finalPrice(total).build();
+        ShoppingCart shoppingCart = ShoppingCart.builder().id(new Random().nextInt(1000)).client(client).products(productMap).finalPrice(total).build();
 
         ShoppingCartFormView shoppingCartFormView = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
 
         shoppingCartFormView.setVisible(true);
     }
+
 }

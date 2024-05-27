@@ -7,11 +7,14 @@ public interface CrudService<T, ID> extends Service<T, ID> {
 
     public T save(T object);
 
-    public T update(ID id, T object);
+    public T update(T object);
 
     public void delete(ID id);
-    
-    public List<T> findAll();
-    
+
     public T findById(ID id);
+
+    List<T> saveAll(List<T> entityList);
+
+    public List<T> findAll();
+
 }

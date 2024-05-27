@@ -3,7 +3,9 @@ package entitys.models.client;
 import entitys.models.addres.Address;
 import entitys.models.telephone.Telephone;
 import interfaces.entitys.clients.IClient;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,39 +36,52 @@ import lombok.experimental.Tolerate;
 
 })
 
-
 @Entity
 @Builder
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
+@ToString
 @Table(name = "clients")
-public class Client implements IClient {
+public class Client implements IClient{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+    
+    @Column(name = "name")
     private String name;
+    
+    @Column(name = "lastname")
     private String lastName;
+    
+    @Column(name = "age")
     private Integer age;
+    
+    @Column(name = "ssn",unique = true)
     private String ssn;
+    
+    @Column(name = "clasification")
     private String clasification;
+    
+    @Column(name = "availability")
     private boolean availability;
     
-    @OneToMany()
+    @OneToMany( fetch = FetchType.EAGER)
     @JoinTable(name= "client_address", joinColumns = @JoinColumn(name = "id_client", referencedColumnName = "id"),
                                 inverseJoinColumns = @JoinColumn(name = "id_address", referencedColumnName = "id") )
     private List<Address> address;
     
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name= "client_phone", joinColumns = @JoinColumn(name = "id_client", referencedColumnName = "id"),
                                 inverseJoinColumns = @JoinColumn(name = "id_phone", referencedColumnName = "id") )
-    private List<Telephone> phone;
+    private List<Telephone> telephone;
 
     @Tolerate
     public Client() {
     }
+
 
    
     

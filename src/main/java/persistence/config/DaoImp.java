@@ -4,12 +4,20 @@ import interfaces.persistences.repositorys.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import persistence.dao.exceptios.DaoExceptions;
 
 public class DaoImp implements Repository {
 
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("posPU");
+    EntityManagerFactory entityManagerFactory;
 
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager;
+
+    public DaoImp(String persistenceUnitName) {
+
+        entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
+
+        entityManager = entityManagerFactory.createEntityManager();
+    }
 
     @Override
     public EntityManager getEntityManager() {
@@ -18,43 +26,67 @@ public class DaoImp implements Repository {
 
             entityManager = entityManagerFactory.createEntityManager();
         }
-        
+
         return entityManager;
     }
 
     @Override
     public void persist(Object object) {
-        
-        getEntityManager();
 
-        entityManager.getTransaction().begin();
+        try {
+            
+            getEntityManager();
 
-        entityManager.persist(object);
+            entityManager.getTransaction().begin();
 
-        entityManager.getTransaction().commit();
+            entityManager.persist(object);
+            
+            entityManager.flush();
 
-        entityManager.close();
+            entityManager.getTransaction().commit();
+
+        } catch (Exception e) {
+
+            System.out.println(new DaoExceptions(e.getMessage()));
+
+        } finally {
+
+            entityManager.close();
+        }
     }
 
     @Override
     public <T> T merge(T entity) {
+
+        try {
+            
+            getEntityManager();
+
+            entityManager.getTransaction().begin();
+
+            entityManager.merge(entity);
+            
+            entityManager.flush();
+
+            entityManager.getTransaction().commit();
+
+            return entity;
+            
+        } catch (Exception e) {
+            
+             System.out.println(new DaoExceptions(e.getMessage()));
+            
+        } finally {
+            
+            entityManager.close();
+        }
         
-       getEntityManager();
-
-        entityManager.getTransaction().begin();
-
-        entityManager.merge(entity);
-
-        entityManager.getTransaction().commit();
-
-        entityManager.close();
-
-        return entity;
+        return null;
     }
 
     @Override
     public void remove(Object entity) {
-        
+
         getEntityManager();
 
         entityManager.getTransaction().begin();
@@ -68,9 +100,9 @@ public class DaoImp implements Repository {
 
     @Override
     public <T> T find(Class<T> entityType, Object primaryKey) {
-        
-         getEntityManager();
-        
+
+        getEntityManager();
+
         return entityManager.find(entityType, primaryKey);
     }
 }

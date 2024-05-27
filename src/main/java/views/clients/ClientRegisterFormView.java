@@ -57,8 +57,6 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
         txtState = new javax.swing.JTextField();
         lblAvailability = new javax.swing.JLabel();
         jcbAvailability = new javax.swing.JCheckBox();
-        btnEdit = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
@@ -145,10 +143,6 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
 
         jcbAvailability.setText("YES/NO");
 
-        btnEdit.setText("Edit");
-
-        btnDelete.setText("Delete");
-
         btnCancel.setText("Cancel");
 
         btnSave.setText("Save");
@@ -205,20 +199,15 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(lblId)
                                         .addGap(160, 160, 160)
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7))
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(lblAvailability)
                                         .addGap(46, 46, 46)
                                         .addComponent(jcbAvailability)
-                                        .addGap(26, 26, 26)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(32, 32, 32)))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblSsn)
                                     .addComponent(txtSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -329,14 +318,10 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
                                 .addGap(3, 3, 3)
                                 .addComponent(lblAvailability)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSave))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete))
-                        .addGap(36, 36, 36))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSave)
+                            .addComponent(btnCancel))
+                        .addGap(93, 93, 93))))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -378,22 +363,6 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
 
     public void setBtnCancel(JButton btnCancel) {
         this.btnCancel = btnCancel;
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JButton getBtnEdit() {
-        return btnEdit;
-    }
-
-    public void setBtnEdit(JButton btnEdit) {
-        this.btnEdit = btnEdit;
     }
 
     public JButton getBtnSave() {
@@ -678,8 +647,6 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;

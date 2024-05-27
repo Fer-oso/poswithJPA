@@ -11,6 +11,7 @@ import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.awt.HeadlessException;
+import java.util.List;
 import lombok.SneakyThrows;
 
 public class ClientRegisterFormController implements ActionListener {
@@ -64,7 +65,7 @@ public class ClientRegisterFormController implements ActionListener {
 
                 createNewClient();
 
-                save(client, address, telephone);
+                save(client, List.of(address), List.of(telephone, telephone2));
 
                 clearForm();
 
@@ -120,7 +121,7 @@ public class ClientRegisterFormController implements ActionListener {
     }
 
     @SneakyThrows
-    private void save(Client client, Address address, Telephone telephone) {
+    private void save(Client client, List<Address> address, List<Telephone> phones) {
 
         if (clientServiceImp.checkDuplicateRegister(client)) {
 
@@ -128,17 +129,15 @@ public class ClientRegisterFormController implements ActionListener {
 
         } else {
 
+            var addressList = addressServiceImp.saveAll(address);
+
+            var telephonesList = telehponeServiceImp.saveAll(phones);
+
+            client.setTelephone(telephonesList);
+
+            client.setAddress(addressList);
+
             client = clientServiceImp.save(client);
-
-            address = addressServiceImp.save(address);
-
-            telephone = telehponeServiceImp.save(telephone);
-
-            telephone2 = telehponeServiceImp.save(telephone2);
-
-            clientServiceImp.insertClientAddress(client, address);
-
-            clientServiceImp.insertClientPhones(client, telephone, telephone2);
 
             JOptionPane.showMessageDialog(clientRegisterFormView, "Client registered succesfully");
         }

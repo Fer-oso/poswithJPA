@@ -2,21 +2,18 @@ package controllers.products;
 
 import entitys.models.product.Product;
 import interfaces.services.ProductService;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
 import views.products.ProductRegisterFormView;
 
-public class ProductRegisterFormController extends MouseAdapter implements ActionListener{
-
-    private static final long serialVersionUID = 1L;
+public class ProductRegisterFormController extends MouseAdapter implements ActionListener {
 
     private final ProductRegisterFormView productRegisterFormView;
 
@@ -42,8 +39,6 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
         productRegisterFormView.getJtTableProducts().addMouseListener(this);
 
         productRegisterFormView.getBtnSave().addActionListener(this);
-
-        productRegisterFormView.getBtnDelete().addActionListener(this);
 
         productRegisterFormView.getBtnCancel().addActionListener(this);
     }
@@ -88,26 +83,6 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
                 System.out.println(ex.getMessage());
             }
         }
-
-        if (e.getSource() == productRegisterFormView.getBtnDelete()) {
-
-            try {
-
-                delete(product.getId());
-
-                clearForm();
-
-                refreshTable();
-
-                listProducts = productServiceImp.findAll();
-
-                listProducts();
-
-            } catch (Exception ex) {
-
-                System.out.println(ex.getMessage());
-            }
-        }
     }
 
     @Override
@@ -125,44 +100,37 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
     @SneakyThrows
     private void createNewProduct() {
 
-        if (!checkFields()) {
+        try {
 
-            product = Product.builder()
-                    .name(productRegisterFormView.getTxtName().getText())
-                    .brand(productRegisterFormView.getTxtBrand().getText())
-                    .price(Double.valueOf(productRegisterFormView.getTxtPrice().getText()))
-                    .stock(Integer.valueOf(productRegisterFormView.getTxtStock().getText()))
-                    .availability(productRegisterFormView.getJcbAvailability().isSelected())
-                    .productCode(productRegisterFormView.getTxtProductCode().getText()).build();
-        } else {
+            if (checkFields()) {
 
-            JOptionPane.showMessageDialog(null, "All fields are required");
+                product = Product.builder()
+                        .name(productRegisterFormView.getTxtName().getText())
+                        .brand(productRegisterFormView.getTxtBrand().getText())
+                        .price(Double.valueOf(productRegisterFormView.getTxtPrice().getText()))
+                        .stock(Integer.valueOf(productRegisterFormView.getTxtStock().getText()))
+                        .availability(productRegisterFormView.getJcbAvailability().isSelected())
+                        .productCode(productRegisterFormView.getTxtProductCode().getText()).build();
+            }
+
+        } catch (HeadlessException | NumberFormatException e) {
+            
+            throw new Exception(e.getMessage());
         }
     }
 
-    private Product save() {
+    private void save() {
 
         if (productServiceImp.checkDuplicateRegister(product)) {
 
             JOptionPane.showMessageDialog(null, "Product already registered, can find him with product_code " + product.getProductCode());
 
-            return null;
-        }
+        } else {
 
-        JOptionPane.showMessageDialog(null, "Product created successfull");
+            product = productServiceImp.save(product);
 
-        return productServiceImp.save(product);
-    }
+            JOptionPane.showMessageDialog(null, "Product created successfull");
 
-    private void delete(Integer id) {
-
-        int value = JOptionPane.showConfirmDialog(null, "Want delete selected product?");
-
-        if (value == 0) {
-
-            productServiceImp.delete(id);
-
-            JOptionPane.showMessageDialog(null, "Product removed succesfully");
         }
     }
 
@@ -221,9 +189,14 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
 
     private boolean checkFields() {
 
-        return productRegisterFormView.getTxtName().getText().equals("") || productRegisterFormView.getTxtPrice().getText().equals("")
+        if (productRegisterFormView.getTxtName().getText().equals("") || productRegisterFormView.getTxtPrice().getText().equals("")
                 || productRegisterFormView.getTxtStock().getText().equals("") || productRegisterFormView.getTxtBrand().getText().equals("")
-                || productRegisterFormView.getTxtProductCode().getText().equals("");
+                || productRegisterFormView.getTxtProductCode().getText().equals("")) {
+            JOptionPane.showMessageDialog(productRegisterFormView, "All fields required");
+
+            return false;
+        }
+        return true;
     }
 
     private void clearForm() {
@@ -249,7 +222,7 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
 
             model.removeRow(i);
 
-            i = i - 1;
+            i -= 1;
         }
     }
 

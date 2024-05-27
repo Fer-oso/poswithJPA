@@ -1,11 +1,8 @@
 package services.client;
 
-import entitys.models.addres.Address;
 import entitys.models.client.Client;
-import entitys.models.telephone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.ClientService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.SneakyThrows;
@@ -21,25 +18,27 @@ public class ClientServiceImp implements ClientService {
 
     @Override
     @SneakyThrows
-    public Client save(Client object) {
+    public Client save(Client client) {
 
-        return clientRepository.save(object).orElseThrow();
+        return clientRepository.save(client).orElseThrow();
+    }
+
+    @Override
+    public List<Client> saveAll(List<Client> clientList) {
+      return  clientRepository.saveAll(clientList);
     }
 
     @Override
     @SneakyThrows
-    public Client update(Integer id, Client object) {
+    public Client update(Client client) {
 
-        return clientRepository.update(object).orElseThrow(() -> new ClientServiceException("No value present with that id"));
+        return clientRepository.update(client).orElseThrow(() -> new ClientServiceException("No value present with that id"));
     }
 
     @Override
-    @SneakyThrows
     public void delete(Integer id) {
 
-        Client client = clientRepository.findById(id).orElseThrow(() -> new ClientServiceException("No value present with that id"));
-
-        clientRepository.delete(client);
+        clientRepository.delete(clientRepository.findById(id).orElseThrow());
     }
 
     @Override
@@ -64,77 +63,17 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public List<Client> findAllByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public List<Client> findAllByLastName(String lastName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return clientRepository.findAllByLastName(lastName);
     }
 
     @Override
-    public List<Client> findAllByAge(Integer age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public boolean checkDuplicateRegister(Client client) {
 
-    @Override
-    public List<Client> findAllByClasification(String clasification) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        return findAll().stream().anyMatch(c -> {
 
-    @Override
-    public List<Client> findAllByAvailability(boolean availability) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean checkDuplicateRegister(Client object) {
-
-        return findAll().stream().anyMatch(t -> {
-
-            return t.getSsn().equalsIgnoreCase(object.getSsn());
+            return c.getSsn().equalsIgnoreCase(client.getSsn());
 
         });
     }
-
-    @SneakyThrows
-    @Override
-    public void insertClientAddress(Client client, Address... address) {
-
-        clientRepository.insertClientAddress(client, address);
-
-    }
-
-    @SneakyThrows
-    @Override
-    public void insertClientPhones(Client client, Telephone... telephones) {
-
-        clientRepository.insertClientPhone(client, telephones);
-    }
-
-    @Override
-    public ArrayList<Telephone> getPhonesClients(Client client) throws Exception {
-        try {
-
-            return clientRepository.getPhonesClients(client);
-
-        } catch (Exception e) {
-
-            throw new ClientServiceException(e.getMessage());
-        }
-    }
-
-    @Override
-    public ArrayList<Address> getAddressClients(Client client) throws Exception {
-        try {
-
-            return clientRepository.getAddressClients(client);
-
-        } catch (Exception e) {
-
-            throw new ClientServiceException(e.getMessage());
-        }
-    }
-
 }

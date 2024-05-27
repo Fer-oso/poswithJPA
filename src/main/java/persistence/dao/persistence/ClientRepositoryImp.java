@@ -1,11 +1,8 @@
 package persistence.dao.persistence;
 
-import entitys.models.addres.Address;
 import entitys.models.client.Client;
-import entitys.models.telephone.Telephone;
 import interfaces.persistences.repositorys.Repository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +20,14 @@ public class ClientRepositoryImp implements ClientRepository {
         repository.persist(client);
 
         return Optional.ofNullable(client);
+    }
+
+    @Override
+    public List<Client> saveAll(List<Client> clientList) {
+
+        clientList.forEach(client -> repository.persist(client));
+
+        return clientList;
     }
 
     @Override
@@ -111,25 +116,4 @@ public class ClientRepositoryImp implements ClientRepository {
 
         return query.getResultList();
     }
-
-    @Override
-    public void insertClientAddress(Client client, Address... address) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void insertClientPhone(Client client, Telephone... phone) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Telephone> getPhonesClients(Client client) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Address> getAddressClients(Client client) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

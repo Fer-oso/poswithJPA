@@ -4,30 +4,38 @@ import entitys.models.telephone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.TelephoneService;
 import java.util.ArrayList;
-import services.exceptions.AddresServiceException;
-import services.exceptions.PhoneServiceException;
+import java.util.List;
 import lombok.SneakyThrows;
+import services.exceptions.AddresServiceException;
 
 public class TelephoneServiceImp implements TelephoneService {
 
-    private static final long serialVersionUID = 1L;
-
     private final TelephoneRepository telephoneRepository;
-    
-    Telephone telephone;
 
+    private Telephone telephone;
+    
     public TelephoneServiceImp(TelephoneRepository phoneRepository) {
         this.telephoneRepository = phoneRepository;
     }
 
     @Override
-    public Telephone save(Telephone object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public Telephone save(Telephone telephone) {
+        
+         if (checkDuplicateRegister(telephone)) {
+
+           return findById(telephone.getId());
+
+        } else {
+
+            return telephoneRepository.save(telephone).orElseThrow(()->new AddresServiceException("Cant duplicate telephone"));
+        }
     }
 
     @Override
-    public Telephone update(Integer id, Telephone object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Telephone update(Telephone telephone) {
+
+        return telephoneRepository.update(telephone).get();
     }
 
     @Override
@@ -46,9 +54,19 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public boolean checkDuplicateRegister(Telephone t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean checkDuplicateRegister(Telephone telephone) {
+        
+          return findAll().stream().anyMatch(t -> {
+            
+            this.telephone = t;
+            
+            return (t.getNumberPhone().equals(telephone.getNumberPhone()));
+        });
     }
 
+    @Override
+    public List<Telephone> saveAll(List<Telephone> telephoneList) {
+        return telephoneRepository.saveAll(telephoneList);
+    }
 
 }

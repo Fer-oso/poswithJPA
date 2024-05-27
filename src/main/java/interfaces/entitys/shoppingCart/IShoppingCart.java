@@ -3,7 +3,8 @@ package interfaces.entitys.shoppingCart;
 import entitys.models.client.Client;
 import entitys.models.product.SelectedProduct;
 import interfaces.entitys.entity.Entity;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 
 public interface IShoppingCart<ID> extends Entity<ID> {
 
@@ -11,9 +12,9 @@ public interface IShoppingCart<ID> extends Entity<ID> {
 
     public void setClient(Client client);
 
-    public ArrayList<SelectedProduct> getProducts();
+    public Map<String,SelectedProduct>getProducts();
 
-    public void setProducts(ArrayList<SelectedProduct> products);
+    public void setProducts(Map<String,SelectedProduct> products);
 
     public Double getFinalPrice();
 

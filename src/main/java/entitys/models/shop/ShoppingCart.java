@@ -3,7 +3,7 @@ package entitys.models.shop;
 import entitys.models.client.Client;
 import entitys.models.product.SelectedProduct;
 import interfaces.entitys.shoppingCart.IShoppingCart;
-import java.util.ArrayList;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +18,11 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ShoppingCart implements IShoppingCart<Integer> {
 
-    private static final long serialVersionUID = 1L;
-
     private Integer id;
 
     private Client client;
 
-    private ArrayList<SelectedProduct> products;
+    private Map<String,SelectedProduct> products;
     
     private Double finalPrice;
 
@@ -32,7 +30,5 @@ public class ShoppingCart implements IShoppingCart<Integer> {
     public ShoppingCart() {
         
     }
-
-    
     
 }

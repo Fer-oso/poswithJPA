@@ -3,6 +3,7 @@ package persistence.dao.persistence;
 import entitys.models.shop.checkout.CheckOut;
 import interfaces.persistences.repositorys.entitys.shop.checkout.CheckOutRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CheckOutRepositoryImp implements CheckOutRepository{
@@ -29,6 +30,11 @@ public class CheckOutRepositoryImp implements CheckOutRepository{
 
     @Override
     public ArrayList<CheckOut> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<CheckOut> saveAll(List<CheckOut> entitysList) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -27,9 +27,9 @@ public interface Person<K> extends Entity<K> {
 
     void setAddress(List<Address> address);
 
-    List<Telephone> getPhone();
+    List<Telephone> getTelephone();
 
-    void setPhone(List<Telephone> phone);
+    void setTelephone(List<Telephone> phone);
 
     boolean isAvailability();
 

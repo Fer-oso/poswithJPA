@@ -245,9 +245,7 @@ public class ProductFindByPcFormView extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         
-        productFindByPcController.refreshTable();
-        
-        productFindByPcController.listProducts();
+        productFindByPcController.loadList();
     }//GEN-LAST:event_formComponentShown
 
     public JButton getBtnEdit() {

@@ -40,32 +40,30 @@ public class POSController implements ActionListener {
 
     POS pos;
 
-   Repository repository = new DaoImp();
-    
+    Repository repository = new DaoImp("posPU");
+
     ClientRepository clientRepository = new ClientRepositoryImp(repository);
     ClientService clientService = new ClientServiceImp(clientRepository);
 
-//    AddressRepository addressRepository = new AddressRepositoryImp(dbConnector);
-//    AddressService addressService = new AddressServiceImp(addressRepository);
+    AddressRepository addressRepository = new AddressRepositoryImp(repository);
+    AddressService addressService = new AddressServiceImp(addressRepository);
+
+    TelephoneRepository phoneRepository = new TelephoneRepositoryImp(repository);
+    TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
 //
-//    TelephoneRepository phoneRepository = new TelephoneRepositoryImp(dbConnector);
-//    TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
+    ProductRepository productRepository = new ProductRepositoryImp(repository);
+    ProductService productService = new ProductServiceImp(productRepository);
 //
-//    ProductRepository productRepository = new ProductRepositoryImp(dbConnector);
-//    ProductService productService = new ProductServiceImp(productRepository);
+    ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepositoryImp(repository);
+    ShoppingCartService shoppingCartService = new ShoppingCartServiceImp(shoppingCartRepository);
+
+    ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productService);
+    ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productService);
 //
-//    ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepositoryImp(dbConnector);
-//    ShoppingCartService shoppingCartService = new ShoppingCartServiceImp(shoppingCartRepository);
+    ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(clientService, addressService, phoneService);
+    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientService, addressService, phoneService);
 //
-//    ShopFormView shopForm = new ShopFormView(productService, clientService, shoppingCartService);
-//
-//    ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productService);
-//    ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productService);
-//
-//    ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(clientService, addressService, phoneService);
-//    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientService, addressService, phoneService);
-//
-//    ShopFormView shopFormView = new ShopFormView(productService, clientService, shoppingCartService);
+    ShopFormView shopFormView = new ShopFormView(productService, clientService, shoppingCartService);
 
     public POSController(POS pos) {
 
@@ -91,39 +89,39 @@ public class POSController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-//        if (e.getSource() == pos.jMenuItemShopForm) {
-//
-//            pos.jTabbedPane1.removeAll();
-//
-//            pos.jTabbedPane1.addTab("", shopForm);
-//        }
-//
-//        if (e.getSource() == pos.jMenuItemProductByPC) {
-//
-//            pos.jTabbedPane1.removeAll();
-//
-//            pos.jTabbedPane1.addTab("", productFindByPcFormView);
-//        }
-//
-//        if (e.getSource() == pos.jMenuItemProductRegister) {
-//
-//            pos.jTabbedPane1.removeAll();
-//
-//            pos.jTabbedPane1.addTab("", productRegisterFormView);
-//        }
-//
-//        if (e.getSource() == pos.jMenuItemClientRegister) {
-//
-//            pos.jTabbedPane1.removeAll();
-//
-//            pos.jTabbedPane1.addTab("", clientRegisterFormView);
-//        }
-//
-//        if (e.getSource() == pos.jMenuItemClientByName) {
-//
-//            pos.jTabbedPane1.removeAll();
-//
-//            pos.jTabbedPane1.addTab("", clientFindByNameFormView);
-//        }
+        if (e.getSource() == pos.jMenuItemShopForm) {
+
+            pos.jTabbedPane1.removeAll();
+
+            pos.jTabbedPane1.addTab("", shopFormView);
+        }
+
+        if (e.getSource() == pos.jMenuItemProductByPC) {
+
+            pos.jTabbedPane1.removeAll();
+
+            pos.jTabbedPane1.addTab("", productFindByPcFormView);
+        }
+
+        if (e.getSource() == pos.jMenuItemProductRegister) {
+
+            pos.jTabbedPane1.removeAll();
+
+            pos.jTabbedPane1.addTab("", productRegisterFormView);
+        }
+
+        if (e.getSource() == pos.jMenuItemClientRegister) {
+
+            pos.jTabbedPane1.removeAll();
+
+            pos.jTabbedPane1.addTab("", clientRegisterFormView);
+        }
+
+        if (e.getSource() == pos.jMenuItemClientByName) {
+
+            pos.jTabbedPane1.removeAll();
+
+            pos.jTabbedPane1.addTab("", clientFindByNameFormView);
+        }
     }
 }
